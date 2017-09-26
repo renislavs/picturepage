@@ -1,0 +1,16 @@
+#logo {
+  height: 50px;
+  margin-top: -15px;
+}
+.reg {
+margin-top: 200px;
+  
+}
+body {
+  background-image: url("../img/luca.jpg");
+  background-size: cover;
+}
+h4{
+  color: white;
+  font-size: 30px;
+}
