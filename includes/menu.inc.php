@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require_once './includes/DbP.inc.php';
     require_once './includes/DbH.inc.php';
     require_once './includes/Authentication.inc.php';
@@ -46,56 +45,7 @@
   </div>
 </nav>     
         
-<div class="container">
-      <div class="row">
-          <div class="col-sm-6 col-md-6 reg">
-                <h4>Log in</h4>
-                <form class="container" action="testLogin.php" method="post">
-                    <input placeholder="Enter email" name="email" required>
-                    <input placeholder="Enter Password" name="password" required>
-                    <button>Submit</button>
-<?php
-                if(isset($_SESSION['error'])) {
-                    printf("session: ".$_SESSION['error']);
-                    printf("<label class='err'>%s.</label>\n", $_SESSION['login_error_msg']);
-                    unset( $_SESSION['error']);
-                }else {
-                    printf("no session: ");
-                }
-                                
-                
-?>
-                </form>
-              </div>
-               <div class="col-sm-6 col-md-6 reg">
-                <h4>Register</h4>
-                <button id="myBtn">Sign me up</button>
-              </div>
-            </div>
-
-    </div><!-- /.container -->
-   
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content --> 
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text..</p>
-        <form id='formalia' class="container" method="post" action="/PicturePage/createVoterDb.php">
-            <label><b>Firstname *</b></label><br />
-            <input type="text" placeholder="Enter firstname" name="firstname" required><br />
-            <label><b>Email *</b></label><br />
-            <input type="text" placeholder="Enter email" name="email" id="email" required><br />
-            <label><b>Password *</b></label><br />
-            <input type="password" placeholder="Enter Password" name="password" required><br />
-            <label><b>Confirm password *</b></label><br />
-            <input type="password" placeholder="Enter Password" name="password2" required><br />
-            <label id="err" style="color:red"></label>
-            
-            <button type="submit" name="createAccountBt">Create</button>
-        </form>
-      </div>
-    </div>        
+      
         
     </body>
     <!-- Bootstrap core JavaScript

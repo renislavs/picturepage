@@ -19,12 +19,12 @@ abstract class AuthA {
     return isset($_SESSION[self::SESSVAR]) ? true : false;
   }
 
- /* private static function setTestCookie() {
+  private static function setTestCookie() {
     setcookie('foo', 'bar', time() + 3600);
-  }*/
+  }
 
   public static function areCookiesEnabled() {
-   // self::setTestCookie();
+    self::setTestCookie();
     return (isset($_COOKIE['foo']) && $_COOKIE['foo'] == 'bar') ? true : false;
   }
     
