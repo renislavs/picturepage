@@ -10,6 +10,7 @@
     //TODO: Validation of user input:
     // Email correct, firstname only characters, two passwords the same?
     
+    
     $sql = 'insert into voter (firstname, email, password)';
     $sql .= ' values(:firstname, :email, :password);';
     try {
@@ -19,6 +20,12 @@
       $q->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
       $q->execute();
     } catch(PDOException $e) {
-      die("Posting failed. <br/>".$e->getMessage());
+        $_SESSION['error'] = "Could not create user (".$e->getMessage().")";
+        header('Location: ./index.php?'.$e->getMessage());
+        die("Posting failed. <br />".$e->getMessage());
+    } catch (Exception $e) {
+        $_SESSION['error'] = "Could not create user (".$e->getMessage().")";
+        header('Location: ./index.php?'.$e->getMessage());
+        die("Posting failed. <br />".$e->getMessage());
     }
     header('Location: ./index.php?voterinserted');

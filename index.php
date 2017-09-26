@@ -12,10 +12,11 @@
         <script>
             'use strict'; // use correct syntax in js. Helps us find issues in js
             var check = function (e) {
+                //window.alert("test");
                 if (document.forms.formalia.password.value !== 
                                    document.forms.formalia.password2.value) {
                     document.forms.formalia.password.focus();
-                    document.forms.formalia.err.innerHTML = "Two password entries differ";
+                    document.getElementById("err").innerHTML = "Two password entries differ";
                     e.preventDefault(); 
                     return false;       
                 } 
@@ -28,6 +29,7 @@
                     e.preventDefault();
                     return false;      
                 }
+              //  window.alert("return true");
                 return true;
             };
             var init = function () {

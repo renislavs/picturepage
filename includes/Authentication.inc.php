@@ -62,6 +62,10 @@ class Authentication extends AuthA {
         return $this->firstname;
     }
     
+    public function getEmail() {
+        return $this->email;
+    }
+    
     public static function getDispvar() {
         return $_SESSION[self::DISPVAR];
     }

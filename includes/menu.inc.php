@@ -37,7 +37,7 @@
     <ul class="nav navbar-nav">
      <?php
       if (Authentication::isAuthenticated()) {
-            printf("<li><a href='upload.php'>Upload</a></li>");
+            printf("<li><a href='profilPage.php'>Upload</a></li>");
             printf("<li><a href='testLogout.php'>Sign out</a></li>");
         }
 ?>
