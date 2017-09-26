@@ -54,7 +54,7 @@ class Authentication extends AuthA {
                 throw new Exception("Not authenticated", 42);
             }
         } catch(PDOException $e) {
-            die($e->getMessage());
+            die($e->getMessage()); 
         }
     }
     

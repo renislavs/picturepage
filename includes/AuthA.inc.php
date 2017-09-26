@@ -15,17 +15,16 @@ abstract class AuthA {
   protected $email;
   protected static $logInstance = NULL;
 
-
   public static function isAuthenticated() {
     return isset($_SESSION[self::SESSVAR]) ? true : false;
   }
 
-  private static function setTestCookie() {
+ /* private static function setTestCookie() {
     setcookie('foo', 'bar', time() + 3600);
-  }
+  }*/
 
   public static function areCookiesEnabled() {
-    self::setTestCookie();
+   // self::setTestCookie();
     return (isset($_COOKIE['foo']) && $_COOKIE['foo'] == 'bar') ? true : false;
   }
     

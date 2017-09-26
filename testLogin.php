@@ -12,13 +12,16 @@
             $auth = Authentication::authenticate($_POST['email'], $_POST['password']);
             if (!Authentication::isAuthenticated()) {
                 $err = 'Error at login, please retry';
+                $_SESSION['login_error_msg'] = "Sorry, that user name or password is incorrect. Please try again.";
+            }
+            else {
+                $err = '';
+                $_SESSION['login_error_msg'] = "good";
             }
         }
-    }
-
-    if (Authentication::isAuthenticated()) {  // am I logged on?
-        header("Location: ./frontPage.php");
-    }                               
+    }    
+    header("Location: ./index.php");
+                                   
 ?>
 <!doctype html>
 <html>
@@ -30,38 +33,7 @@
     <body>
 <?php
     include './includes/menu.inc.php';
-?>
-        <main id="mydiv">
-          <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-            <table id="login">
-                <caption>Login</caption>
-                <tr>
-                  <td>Email:</td><td><input type="text" name="email"/></td>
-                </tr>
-                <tr>
-                  <td>Password: </td><td><input type="password" name="password"/></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>
-                    <input type="submit" value="OK"/>&nbsp;&nbsp;&nbsp;
-                    <input type="button" value="Cancel" 
-                          onclick="window.location='./index.php'"/>
-                  </td>
-                </tr>
-<?php
-                if ($err != '') {
-                  printf("<tr><td colspan='2' class='err'>%s.</td></tr>\n", $err);
-                }
-                if (!Authentication::areCookiesEnabled()) {
-                  print("<tr><td colspan='2' class='err'>Cookies 
-                      from this domain must be 
-                      enabled before attempting login.</td></tr>");
-                }
-?>
-          </table>
-        </form>
-      </main>
+?>  
 
   </body>
 </html>

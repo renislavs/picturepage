@@ -1,7 +1,3 @@
-<?php
-    session_start();
-    require_once './includes/Authentication.inc.php';
-?>
 
 <!DOCTYPE html>
 
@@ -16,13 +12,13 @@
             var check = function (e) {
                 if (document.forms.formalia.password.value !== 
                                    document.forms.formalia.password2.value) {
-                    //window.alert("Two password entries differ");
                     document.forms.formalia.password.focus();
                     document.forms.formalia.err.innerHTML = "Two password entries differ";
                     e.preventDefault(); 
                     return false;       
                 } 
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var email = document.forms.formalia.email.value;
                 if (!re.test(email))
                 {
                     document.getElementById("err").innerHTML = "Email is not correct";
@@ -30,6 +26,7 @@
                     e.preventDefault();
                     return false;      
                 }
+                return true;
             };
             var init = function () {
                 document.forms.formalia.addEventListener('submit', check);
@@ -55,69 +52,9 @@
 
     </head>
     <body>
-        
-        <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img id="logo" src="img/Logo.png"></a>
-    </div>
-    <ul class="nav navbar-nav">
-      
-      <li><a href="#">Upload</a></li>
-      <li><a href="#">Sign out</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <div class="container">
-      <div class="row">
-          <div class="col-sm-6 col-md-6 reg">
-                <h4>Log in</h4>
-                <form class="container" action="testLogin.php" method="post">
-                    <input placeholder="Enter email" name="email" required>
-                    <input placeholder="Enter Password" name="password" required>
-                    <button>Submit</button>
-                    
-                </form>
-              </div>
-               <div class="col-sm-6 col-md-6 reg">
-                <h4>Register</h4>
-                <button id="myBtn">Sign me up</button>
-              </div>
-            </div>
-
-    </div><!-- /.container -->
    
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content --> 
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text..</p>
-        <form id='formalia' class="container" method="post">
-            <label><b>Firstname *</b></label><br />
-            <input type="text" placeholder="Enter firstname" name="firstname" required><br />
-            <label><b>Email *</b></label><br />
-            <input type="text" placeholder="Enter email" name="email" id="email" required><br />
-            <label><b>Password *</b></label><br />
-            <input type="password" placeholder="Enter Password" name="password" required><br />
-            <label><b>Confirm password *</b></label><br />
-            <input type="password" placeholder="Enter Password" name="password2" required><br />
-            <label id="err" style="color:red"></label>
-            <button type="submit" name="createAccountBt">Create</button>
-        </form>
-      </div>
-    </div>        
-        
-    </body>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<?php
+    include './includes/menu.inc.php';
+?>
+    
 </html>
