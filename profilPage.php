@@ -127,7 +127,7 @@ border: 1px lightgrey solid;
         $sql .= " from photo";
         $sql .= " where credit = :email";
         $q = $dbh->prepare($sql);
-        $q->bindValue(':email', $_SESSION[Authentication::getEmail()]);
+        $q->bindValue(':email', Authentication::getEmail());
         $q->execute();
         
     } catch(PDOException $e) {
@@ -153,13 +153,6 @@ border: 1px lightgrey solid;
     }
    
 ?>
-          <!--div class="col-sm-3 col-md-3">
-          style='display: block; margin: auto 0!important;'
-              <img style="display: block; margin: auto 0!important;" src="images/5.jpg">  
-          </div>
-           <div class="col-sm-3 col-md-3">           
-             <img src="images/6.jpg">  
-          </div-->
           
    </div>
 <br><br>
