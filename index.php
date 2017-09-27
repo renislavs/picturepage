@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require_once './includes/Photo.inc.php';
+    require_once './includes/Authentication.inc.php';
 ?>
 <!DOCTYPE html>
 
@@ -9,6 +11,7 @@
         <title>PicturePage</title>
         <link rel="stylesheet" type="text/css" href="./css/modalStyle.css">
         <script src="./js/modalFunc.js"></script> 
+        <link rel="stylesheet" href="dist/css/lightbox.min.css">
         <script>
             'use strict'; // use correct syntax in js. Helps us find issues in js
             var check = function (e) {
@@ -29,7 +32,6 @@
                     e.preventDefault();
                     return false;      
                 }
-              //  window.alert("return true");
                 return true;
             };
             var init = function () {
@@ -49,10 +51,10 @@
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
         <!-- Bootstrap core CSS -->
-        <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="starter-template.css" rel="stylesheet">
-        <link href="css/mystyle.css" rel="stylesheet">
+        <link href="./css/mystyle.css" rel="stylesheet">
 
     </head>
     <body>
@@ -61,12 +63,13 @@
     include './includes/menu.inc.php';
 ?>
 <div class="container">
-      <div class="row">
-          <div class="col-sm-6 col-md-6 reg">
+      
 <?php              
 if (!Authentication::isAuthenticated()) {
-                   
+                  
 ?>    
+    <div class="row">
+          <div class="col-sm-6 col-md-6 reg"> 
                 <h4>Log in</h4>
                 <form class="container" action="testLogin.php" method="post">
                     <input placeholder="Enter email" name="email" required>
@@ -89,18 +92,6 @@ if (!Authentication::isAuthenticated()) {
                 <button id="myBtn">Sign me up</button>
               </div>
             </div>
-<?php
-    } else {// end !authenticated
-?>
-    
-    
-    
-<?php
-    } // end authenticated - see pics
-?>    
-    
-    </div><!-- /.container -->
-   
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content --> 
@@ -122,4 +113,96 @@ if (!Authentication::isAuthenticated()) {
         </form>
       </div>
     </div>      
+<?php
+    } else {// end !authenticated
+    // See all pictures
+
+    require_once './includes/DbP.inc.php';
+    require_once './includes/DbH.inc.php';
+    require_once './includes/Photo.inc.php';
+    $dbh = DbH::getDbH();
+    try {
+        $sql  = "select p.caption, p.credit, p.id, p.imagedata, p.mimetype, p.story, p.tags, count(v.photoid) votes";
+        $sql .= " from photo p left join vote v on p.id = v.photoid ";
+        $sql .= " group by p.id";
+        $sql .= " order by RAND()"; // random order        
+        $q = $dbh->prepare($sql);
+        $q->bindValue(':email', Authentication::getEmail());
+        $q->execute();
+       
+    } catch(PDOException $e) {
+        $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
+      //  header('Location: ./profilPage.php?'.$e->getMessage());
+        die("Reading failed.<br />".$sql."<br />".$e->getMessage());
+    } catch (Exception $e) {
+        $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
+      //  header('Location: ./profilPage.php?'.$e->getMessage());
+        die("Reading failed.<br />".$sql."<br />".$e->getMessage());
+    }
+    
+    $a = array();
+    while ($out = $q->fetch()) {
+        $g = new Photo($out['caption'], $out['credit'], $out['id'], $out['imagedata'], $out['mimetype'], $out['story'], $out['tags']);
+        $g->setVotes($out['votes']);
+        array_push($a, $g);
+    }
+
+    // Get votes - so that user cannot vote on the same picture twice
+        try {
+        $sql  = "select photoid";
+        $sql .= " from vote";
+        $sql .= " where voter = :email";
+        $q2 = $dbh->prepare($sql);
+        $q2->bindValue(':email', Authentication::getEmail());
+        $q2->execute();
+       
+    } catch(PDOException $e) {
+        $_SESSION['error'] = "Could not get vote (".$e->getMessage().")";
+      //  header('Location: ./profilPage.php?'.$e->getMessage());
+        die("Reading failed.<br />".$sql."<br />".$e->getMessage());
+    } catch (Exception $e) {
+        $_SESSION['error'] = "Could not get vote (".$e->getMessage().")";
+      //  header('Location: ./profilPage.php?'.$e->getMessage());
+        die("Reading failed.<br />".$sql."<br />".$e->getMessage());
+    }
+    
+    $a2 = array();
+    while ($out2 = $q2->fetch()) {
+        array_push($a2, $out2['photoid']);
+    }
+    
+  //  print("<div class='row'>\n"); 
+        
+    foreach ($a as $gb) {
+        print("<div class='col-sm-3 col-md-3 nomar'>\n"); 
+        
+        print($gb->getCaption()." by ".$gb->getCredit());
+            print("<a href='getImage.php?id=".$gb->getId().
+                    " data-lightbox='example-set' data-title='Click the right half of the image to move forward. Click the right half of the image to move forward.Click the right half of the image to move forward.'".
+                    " rel='lightbox'>");
+            print($gb);
+            
+        print("</a>\n");
+        print("<p>".$gb->getVotes()." votes.</p>\n");
+        
+    //    if (!in_array($gb->getId(), $a2)) {
+           print("<a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a>\n");
+            //print("<button type='button'><a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a></button>\n");
+     //   }
+        print("</div>\n");
+    }
+    
+    //print("</div>\n");
+   
+?>
+    
+    
+<?php
+    } // end authenticated - see pics
+?>    
+    
+    </div><!-- /.container -->
+   
+    
+    <script src="js/lightbox-plus-jquery.js" type="text/javascript"></script>    
 </html>
