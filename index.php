@@ -73,6 +73,10 @@
                     printf("<br /><label class='err'>%s.</label>\n", $_SESSION['login_error_msg']);
                     unset( $_SESSION['login_error_msg']);
                 }
+                if(isset($_SESSION['errmsg'])) {
+                    printf("<br /><label class='err'>%s.</label>\n", $_SESSION['errmsg']);
+                    unset( $_SESSION['errmsg']);
+                }
 ?>
                 </form>
               </div>
