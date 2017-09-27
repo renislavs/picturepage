@@ -16,6 +16,7 @@
 class Authentication extends AuthA {
     const DISPVAR = 'waldo42';
     private $firstname;
+    private $email;
 
     private function __construct($email, $pwd) {
         try {
@@ -62,8 +63,8 @@ class Authentication extends AuthA {
         return $this->firstname;
     }
     
-    public function getEmail() {
-        return $this->email;
+    public static function getEmail() {
+        return $_SESSION[self::SESSVAR];
     }
     
     public static function getDispvar() {

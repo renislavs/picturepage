@@ -126,9 +126,8 @@ border: 1px lightgrey solid;
         $sql  = "select caption, credit, id, imagedata, mimetype, story, tags";
         $sql .= " from photo";
         $sql .= " where credit = :email";
-      //TODO  $sql .= " order by inch, stocklevel";
         $q = $dbh->prepare($sql);
-        $q->bindValue(':email', "haffemn@gmail.com");//TODO
+        $q->bindValue(':email', $_SESSION[Authentication::getEmail()]);
         $q->execute();
         
     } catch(PDOException $e) {

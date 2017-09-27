@@ -12,7 +12,7 @@
  */
 abstract class AuthA {
   const SESSVAR = 'nAuth42';
-  protected $email;
+  //protected $email;
   protected static $logInstance = NULL;
 
   public static function isAuthenticated() {
@@ -39,7 +39,7 @@ abstract class AuthA {
     
     abstract protected function dbLookUp($email, $passwordattempt);
     
-    protected function getEmail() {
+    /*protected function getEmail() {
         return $this->email;
-    }
+    }*/
 }

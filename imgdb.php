@@ -16,10 +16,8 @@
     // Read in one gulp and addslashes
     $imagedata = addslashes(file_get_contents($_FILES['img']['tmp_name']));
     $mimetype = $_FILES['img']['type'];
-    $credit = "haffemn@gmail.com";//TODO
-   // $story = "bla bla";
+    $credit = $_SESSION[Authentication::getEmail()]; //Authentication::getDispvar() Authentication::email
     
-    //TODO email, credit from session
     $gb = new Photo($caption, $credit, $id, $imagedata, $mimetype, $story, $tags);
     
     $sql = 'start transaction;';
@@ -30,7 +28,6 @@
       $q = $dbh->prepare($sql);
       $q->bindValue(':caption', $caption); //input
       $q->bindValue(':credit', $credit);//input
-    //  $q->bindValue(':id', $id);//TODO input
       $q->bindValue(':imagedata', $imagedata);//input
       $q->bindValue(':mimetype', $mimetype);
       $q->bindValue(':story', $story);//input
