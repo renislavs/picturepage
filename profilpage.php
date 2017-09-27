@@ -105,11 +105,6 @@ border: 1px lightgrey solid;
     </form>
   </div>
 
-   <div class="col-sm-12 col-md-6">
-        
-         <img style="border: 1px lightgrey solid; margin-top: 20px;"src="images/ex.jpg">       
-
-  </div>
 </div>
 
 <div class="row">
@@ -129,9 +124,13 @@ border: 1px lightgrey solid;
     require_once './includes/Photo.inc.php';
     $dbh = DbH::getDbH();
     try {
-        $sql  = "select caption, credit, id, imagedata, mimetype, story, tags";
+/*        $sql  = "select caption, credit, id, imagedata, mimetype, story, tags";
         $sql .= " from photo";
-        $sql .= " where credit = :email";
+        $sql .= " where credit = :email";*/
+        $sql  = "select p.caption, p.credit, p.id, p.imagedata, p.mimetype, p.story, p.tags, count(v.photoid) votes";
+        $sql .= " from photo p left join vote v on p.id = v.photoid ";
+        $sql .= " where p.credit = :email";
+        $sql .= " group by p.id";
         $q = $dbh->prepare($sql);
         $q->bindValue(':email', Authentication::getEmail());
         $q->execute();
@@ -149,18 +148,21 @@ border: 1px lightgrey solid;
     $a = array();
     while ($out = $q->fetch()) {
         $g = new Photo($out['caption'], $out['credit'], $out['id'], $out['imagedata'], $out['mimetype'], $out['story'], $out['tags']);
+        $g->setVotes($out['votes']);
         array_push($a, $g);
     }
 
     foreach ($a as $gb) {
         print("<div class='col-sm-3 col-md-3'>\n"); //TODO find class style
         print($gb);
+        print($gb->getVotes()." votes.");
         print("</div>\n");
     }
    
 ?>
           
    </div>
+
 <br><br>
 
 </div><!-- /.container -->
@@ -170,10 +172,10 @@ border: 1px lightgrey solid;
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"></script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
+    <script src="./js/vendor/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
 
