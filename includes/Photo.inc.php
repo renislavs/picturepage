@@ -12,6 +12,7 @@ class Photo {
     private $mimetype;
     private $story;
     private $tags;
+    private $votes;
 
     function __construct($caption, $credit, $id, $imagedata, $mimetype, $story, $tags) {
         $this->caption = $caption;
@@ -21,6 +22,7 @@ class Photo {
         $this->mimetype = $mimetype;
         $this->story = $story;
         $this->tags = $tags;
+        $this->votes = 0;
     }
     
     public function __toString() {
@@ -32,6 +34,14 @@ class Photo {
  
     function getCaption() {
         return $this->caption;
+    }
+
+    function getVotes() {
+        return $this->votes;
+    }
+
+    function setVotes($votes) {
+        $this->votes = $votes;
     }
 
     function getCredit() {
