@@ -70,7 +70,7 @@
                     <button>Submit</button>
 <?php
                 if(isset($_SESSION['login_error_msg'])) {
-                    printf("<br /><label class='err'>%s.</label>\n", $_SESSION['login_error_msg']);
+                    printf("<br /><label class='err'>%s</label>\n", $_SESSION['login_error_msg']);
                     unset( $_SESSION['login_error_msg']);
                 }
 ?>
