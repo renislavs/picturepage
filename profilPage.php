@@ -81,7 +81,7 @@ border: 1px lightgrey solid;
          Browse
           </button-->    
     <form action="imgdb.php" method="post" id='deform' enctype="multipart/form-data"> 
-        <input type="hidden" name="MAX_FILE_SIZE" value="131072"/>
+        <input type="hidden" name="MAX_FILE_SIZE" value="256000"/>
         <input type='file' id='bild' name='img' style="margin-bottom: 30px;" class="btn btn-default dropdown-toggle" />
   
         <p class="Uploadtext">Caption</p>
@@ -95,7 +95,13 @@ border: 1px lightgrey solid;
 
         <button style="margin-bottom: 30px; margin-top: 10px;" type="submit" class="btn btn-default dropdown-toggle">
          Add image to Library
-          </button>  
+        </button>  
+<?php        
+
+        if (ISSET($_SESSION["errmsg"])) {
+            print("<p>".$_SESSION["errmsg"]."</p>");
+        }
+?>                
     </form>
   </div>
 
@@ -131,11 +137,11 @@ border: 1px lightgrey solid;
         $q->execute();
         
     } catch(PDOException $e) {
-        $_SESSION['error'] = "Could not create user (".$e->getMessage().")";
+        $_SESSION['error'] = "Could not create img (".$e->getMessage().")";
       //  header('Location: ./profilPage.php?'.$e->getMessage());
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     } catch (Exception $e) {
-        $_SESSION['error'] = "Could not create user (".$e->getMessage().")";
+        $_SESSION['error'] = "Could not create img (".$e->getMessage().")";
       //  header('Location: ./profilPage.php?'.$e->getMessage());
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     }

@@ -1,7 +1,28 @@
 <?php
-    if (!(isset($_FILES['img']) && $_FILES['img']['size'] > 0)) {
+    session_start();    
+    if(!(isset($_FILES['img']))) {
+        header("Location: ./profilPage.php");
+        
+    } else if ($_FILES['img']['error'] > 0) { // there is a issue with fileupload - find err-code and make good msg to user
+        
+        if($_FILES['img']['error'] == UPLOAD_ERR_FORM_SIZE) {
+            $_SESSION["errmsg"] = "The file is too big";
+            
+
+        }
+        header("Location: ./profilPage.php");
+        // and so on... http://php.net/manual/en/features.file-upload.errors.php
+    } else {
+    
+    if ($_FILES['img']['size'] == 0) {
+        $_SESSION["errmsg"] = "No data";
         header("Location: ./profilPage.php");
     }
+    
+    // Check filesize here.
+   /* if ($_FILES['upfile']['size'] > 1000000) {
+        throw new RuntimeException('Exceeded filesize limit.');
+    }*/
     
     require_once './includes/DbP.inc.php';
     require_once './includes/DbH.inc.php';
@@ -16,7 +37,8 @@
     // Read in one gulp and addslashes
     $imagedata = addslashes(file_get_contents($_FILES['img']['tmp_name']));
     $mimetype = $_FILES['img']['type'];
-    $credit = $_SESSION[Authentication::getEmail()]; //Authentication::getDispvar() Authentication::email
+    $test = Authentication::getEmail();
+    $credit = $test; //Authentication::getDispvar() Authentication::email
     
     $gb = new Photo($caption, $credit, $id, $imagedata, $mimetype, $story, $tags);
     
@@ -43,4 +65,4 @@
     $dbh->query($sql);
     
     header('Location: ./profilPage.php?inserted');
-    
+    }

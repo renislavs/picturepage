@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once './includes/DbP.inc.php';
     require_once './includes/DbH.inc.php';
     $dbh = DbH::getDbH();
@@ -17,9 +18,11 @@
             $out = $q->fetch();
         } catch(PDOException $e)  {
             printf("Error getting image.<br/>". $e->getMessage(). '<br/>' . $sql);
-            die('');
+            die('Error getting image');
+        } catch(Exception $e)  {
+            printf("Error getting image.<br/>". $e->getMessage(). '<br/>' . $sql);
+            die('Error getting image');
         }
-
         $out['imagedata'] = stripslashes($out['imagedata']);
         header("Content-type: " . $out['mimetype']);
         echo $out['imagedata'];	
