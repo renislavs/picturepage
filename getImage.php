@@ -8,7 +8,7 @@
         $$key = trim($value);  // vars with names as in form
     }
     if(isset($id)) {
-            $sql  = "select caption, credit, id, imagedata, mimetype, story, tags";
+            $sql  = "select imagedata, mimetype";
             $sql .= " from photo";
             $sql .= " where id = :id";
         try {    
