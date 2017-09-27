@@ -113,10 +113,18 @@ if (!Authentication::isAuthenticated()) {
         </form>
       </div>
     </div>      
+    
+    
 <?php
     } else {// end !authenticated
     // See all pictures
-
+?>
+    <form action="index.php" method="post">
+        <input type="checkbox" name="sorted" onChange="this.form.submit()" /> Show me sorted pictures 
+    </form>
+    <br /><br /> 
+    <br />
+<?php    
     require_once './includes/DbP.inc.php';
     require_once './includes/DbH.inc.php';
     require_once './includes/Photo.inc.php';
@@ -125,14 +133,17 @@ if (!Authentication::isAuthenticated()) {
         $sql  = "select p.caption, p.credit, p.id, p.imagedata, p.mimetype, p.story, p.tags, count(v.photoid) votes";
         $sql .= " from photo p left join vote v on p.id = v.photoid ";
         $sql .= " group by p.id";
-        $sql .= " order by RAND()"; // random order        
+        if (isset($_POST['sorted'])) {
+            $sql .= " order by count(v.photoid) DESC"; // random order        
+        } else {
+            $sql .= " order by RAND()"; // random order        
+        }
         $q = $dbh->prepare($sql);
         $q->bindValue(':email', Authentication::getEmail());
         $q->execute();
        
     } catch(PDOException $e) {
         $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
-      //  header('Location: ./profilPage.php?'.$e->getMessage());
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     } catch (Exception $e) {
         $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
@@ -171,28 +182,25 @@ if (!Authentication::isAuthenticated()) {
         array_push($a2, $out2['photoid']);
     }
     
-  //  print("<div class='row'>\n"); 
+    print("<div class='row'>\n"); 
         
     foreach ($a as $gb) {
         print("<div class='col-sm-3 col-md-3 nomar'>\n"); 
         
         print($gb->getCaption()." by ".$gb->getCredit());
-            print("<a href='getImage.php?id=".$gb->getId().
-                    " data-lightbox='example-set' data-title='Click the right half of the image to move forward. Click the right half of the image to move forward.Click the right half of the image to move forward.'".
-                    " rel='lightbox'>");
+            print("<a href='getImage.php?id=".$gb->getId()."' data-lightbox='example-set'>");
             print($gb);
             
         print("</a>\n");
-        print("<p>".$gb->getVotes()." votes.</p>\n");
+    //    print("<p>".$gb->getVotes()." votes.</p>\n");
         
     //    if (!in_array($gb->getId(), $a2)) {
-           print("<a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a>\n");
-            //print("<button type='button'><a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a></button>\n");
-     //   }
+            print("<button type='button'><a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a></button>\n");
+    //    }
         print("</div>\n");
     }
     
-    //print("</div>\n");
+    print("</div>\n");
    
 ?>
     
