@@ -27,7 +27,7 @@
     <title>ProfilPage</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
@@ -103,12 +103,6 @@ border: 1px lightgrey solid;
         }
 ?>                
     </form>
-  </div>
-
-   <div class="col-sm-12 col-md-6">
-        
-         <img style="border: 1px lightgrey solid; margin-top: 20px;"src="images/ex.jpg">       
-
   </div>
 </div>
 

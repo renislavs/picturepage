@@ -27,7 +27,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img id="logo" src="img/Logo.png"></a>
+        <a class="navbar-brand" href="index.php"><img id="logo" src="img/Logo.png"></a>
     </div>
  <?php      if (Authentication::isAuthenticated()) {
                 printf("<br /><div>Welcome %s</div>", 

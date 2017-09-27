@@ -63,6 +63,10 @@
 <div class="container">
       <div class="row">
           <div class="col-sm-6 col-md-6 reg">
+<?php              
+if (!Authentication::isAuthenticated()) {
+                   
+?>    
                 <h4>Log in</h4>
                 <form class="container" action="testLogin.php" method="post">
                     <input placeholder="Enter email" name="email" required>
@@ -85,7 +89,16 @@
                 <button id="myBtn">Sign me up</button>
               </div>
             </div>
-
+<?php
+    } else {// end !authenticated
+?>
+    
+    
+    
+<?php
+    } // end authenticated - see pics
+?>    
+    
     </div><!-- /.container -->
    
     <!-- The Modal -->

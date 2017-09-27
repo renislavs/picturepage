@@ -1,5 +1,6 @@
 <?php
     session_start();    
+    require_once './includes/Authentication.inc.php';
     if(!(isset($_FILES['img']))) {
         header("Location: ./profilPage.php");
         
