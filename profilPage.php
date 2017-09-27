@@ -33,24 +33,58 @@
     <link href="starter-template.css" rel="stylesheet">
     <link href="./css/mystyle.css" rel="stylesheet">
   <style>
-#logo{
-  margin-left: 10px;
+.nav {
+  float: right;
+  margin-right: 40px;
 }
-  body {
-    background-image: none!important;
-    background-color: #f2f2f2;
-  }
+body {
+
+  background-image: url("images/pexel1.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0px;
+  margin: 0px;
+}
+
+input{
+  border-radius: 5px;
+  height: 30px;
+  width: 280px;
+}
+  button {
+
+    border-radius: 3px;
+    background-color: #686EAF!important;
+    border: none;
+    color: white;
+    width: 150px;
+    height: 50px;
+    font-size: 25px!important;
+}
+
+.black {
+  color: #686868;
+}
+
+#logo{
+  margin-left: 60px;
+}
+ 
   .line {
 width: 80px;
 height: 4px;
-background-color: #019fb3;
+background-color: #686EAF;
+
   }
+
   h1, h2, h3, h4, p {
-    color: #686868;
+    color: white;
   }
+
   .color{
     background-color:#019fb3;
   }
+
   img{
     display: block;
     margin: auto 0;
@@ -59,9 +93,30 @@ background-color: #019fb3;
   margin-bottom: 0px;
   margin-top: 8px;
 }
+
 .example {
 border: 1px lightgrey solid;
 }
+
+.container-lib{
+
+width: 100%!important;
+background-color:#f2f2f2;
+padding: 10px;
+padding-bottom: 50px;
+}
+
+.container-fluid{
+
+  margin: 0px;
+  padding: 0px;
+}
+
+.row {
+  margin-left: 50px;
+  padding-bottom: 30px;
+}
+
   </style>
   </head>
 
@@ -71,7 +126,7 @@ border: 1px lightgrey solid;
     include './includes/menu.inc.php';
 ?>
 
-<div class="container">
+<div class="container-fluid">
 <div class="row">
 
   <div class="col-sm-12 col-md-6">
@@ -93,8 +148,8 @@ border: 1px lightgrey solid;
         <p class="Uploadtext">Tags</p>
         <input type="text" name="tags"><br>
 
-        <button style="margin-bottom: 30px; margin-top: 10px;" type="submit" class="btn btn-default dropdown-toggle">
-         Add image to Library
+        <button style="margin-bottom: 30px; margin-top: 10px;" type="submit" class="btn dropdown-toggle">
+         Add
           </button>  
     </form>
   </div>
@@ -105,16 +160,21 @@ border: 1px lightgrey solid;
 
   </div>
 </div>
+<div class="container-lib">
+
 
 <div class="row">
 
+
+
 <div class="col-sm-12 col-md-12">
-     <h1 class="title">Your Library</h1>
+     <h1 class="title black">Your Library</h1>
      <div class="line"></div>
        
 </div>
 </div>
-<br><br>
+
+
 
 <div class="row rowmar">
 <?php
@@ -145,7 +205,6 @@ border: 1px lightgrey solid;
         $g = new Photo($out['caption'], $out['credit'], $out['id'], $out['imagedata'], $out['mimetype'], $out['story'], $out['tags']);
         array_push($a, $g);
     }
-
     foreach ($a as $gb) {
         print("<div class='col-sm-3 col-md-3'>\n"); //TODO find class style
         print($gb);
@@ -155,7 +214,8 @@ border: 1px lightgrey solid;
 ?>
           
    </div>
-<br><br>
+   </div>
+
 
 </div><!-- /.container -->
 
@@ -170,6 +230,5 @@ border: 1px lightgrey solid;
     <script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
-
   </body>
 </html>
