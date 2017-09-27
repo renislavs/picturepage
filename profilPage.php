@@ -31,7 +31,7 @@
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
-    <link href="mystyle.css" rel="stylesheet">
+    <link href="./css/mystyle.css" rel="stylesheet">
   <style>
 #logo{
   margin-left: 10px;
@@ -147,15 +147,15 @@ border: 1px lightgrey solid;
         array_push($a, $g);
     }
 
-    //print("<div class='col-sm-3 col-md-3'>\n");
     foreach ($a as $gb) {
-        print("<div class='col-sm-3 col-md-3'>\n");
+        print("<div class='col-sm-3 col-md-3'>\n"); //TODO find class style
         print($gb);
         print("</div>\n");
     }
-   // print("</div>\n");
+   
 ?>
           <!--div class="col-sm-3 col-md-3">
+          style='display: block; margin: auto 0!important;'
               <img style="display: block; margin: auto 0!important;" src="images/5.jpg">  
           </div>
            <div class="col-sm-3 col-md-3">           
