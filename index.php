@@ -72,8 +72,8 @@ if (!Authentication::isAuthenticated()) {
           <div class="col-sm-6 col-md-6 reg"> 
                 <h4>Log in</h4>
                 <form class="container" action="testLogin.php" method="post">
-                    <input placeholder="Enter email" name="email" required>
-                    <input placeholder="Enter Password" name="password" required>
+                    <input type="text" placeholder="Enter email" name="email" required>
+                    <input type="password" placeholder="Enter Password" name="password" required>
                     <button>Submit</button>
 <?php
                 if(isset($_SESSION['login_error_msg'])) {
