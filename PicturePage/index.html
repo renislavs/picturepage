@@ -14,8 +14,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
+   <link rel="stylesheet" href="dist/css/lightbox.min.css">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>PictureView</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,11 +24,40 @@
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
     <link href="mystyle.css" rel="stylesheet">
+
+    
+  <style>
+  .nav  {
+    float: right;
+  }
+body{
+  background-color: white!important;
+  background-image: none;
+}
+.rowmar{
+margin-top: 20px;
+}
+.title {
+  text-align: center;
+}
+.h4text {
+  color: black;
+  font-size: 15px;
+}
+.dropdown{
   
+  margin-left: 16px;
+  margin-bottom: 16px;
+  
+}
+
+
+
+  </style>
   </head>
 
   <body>
-
+    
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -42,35 +72,118 @@
   </div>
 </nav>
 
+
+
+
     <div class="container">
+    <h1 class="title">Se all our pictures</h1>
+
+
+
+
+  <div class="row center">
+
+    <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort images
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Random</a></li>
+    <li><a href="#">Highest ratet</a></li>
+    
+  </ul>
+  </div>
+
+
+
+
+ </div>
+
 
       <div class="row">
 
 
 
-          <div class="col-sm-6 col-md-6 reg">
+          <div class="col-sm-3 col-md-3">
+
+             <a href="img/1.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward.Click the right half of the image to move forward.Click the right half of the image to move forward."><img class="example-image" src="img/1.jpg" width="200" height="150" alt=""/></a>
+            <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+             
+          </div>
+
+           <div class="col-sm-3 col-md-3">
             
-                <h4>Log in</h4>
-                <input placeholder="Email">
-                <input placeholder="Password">
-                <button>Submit</button>
-              </div>
+             <a href="img/2.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="img/2.jpg" width="200" height="150" alt="" /></a> 
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
 
+          </div>
 
-
-
-
-               <div class="col-sm-6 col-md-6 reg">
+           <div class="col-sm-3 col-md-3">
             
-              
-                <h4>Register</h4>
-                
-                <button>Do it</button>
-              </div>
+             <a href="img/3.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/3.jpg" width="200" height="150" alt="" /></a>
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+
+          </div>
+
+           <div class="col-sm-3 col-md-3">
+            
+             <a href="img/4.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/4.jpg" width="200" height="150" alt="" /></a>
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+
+          </div>
 
 
 
-            </div>
+
+   </div>
+
+
+
+   <div class="row rowmar">
+
+
+
+
+          <div class="col-sm-3 col-md-3">
+            
+             <a href="img/5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/5.jpg" width="200" height="150" alt="" /></a>
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+
+
+
+          </div>
+
+           <div class="col-sm-3 col-md-3">
+            
+             <a href="img/6.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/6.jpg" width="200" height="150" alt="" /></a> 
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+
+          </div>
+
+           <div class="col-sm-3 col-md-3">
+            
+             <a href="img/7.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/7.jpg" width="200" height="150" alt="" /></a> 
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button>
+
+          </div>
+
+           <div class="col-sm-3 col-md-3">
+            
+             <a href="img/8.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="img/8.jpg" width="200" height="150" alt="" /></a> 
+             <button type="button" class="btn btn-default"><a href="#">VOTE</a></button> 
+
+          </div>
+
+
+
+
+
+
+   </div>
+
+
+
+
+  
 
 
 
@@ -80,7 +193,7 @@
 
     </div><!-- /.container -->
 
-
+<script src="dist/js/lightbox-plus-jquery.min.js"></script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
