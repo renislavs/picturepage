@@ -27,11 +27,12 @@
     <title>ProfilPage</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
     <link href="./css/mystyle.css" rel="stylesheet">
+    <link href="./css/popupCSS.css" rel="stylesheet">
   <style>
 #logo{
   margin-left: 10px;
@@ -98,8 +99,8 @@ border: 1px lightgrey solid;
           </button>  
 <?php        
 
-        if (ISSET($_SESSION["errmsg"])) {
-            print("<p>".$_SESSION["errmsg"]."</p>");
+        if (ISSET($_SESSION["error"])) {
+            print("<p>".$_SESSION["error"]."</p>");
         }
 ?>                
     </form>
@@ -154,7 +155,7 @@ border: 1px lightgrey solid;
 
     foreach($images as $image){
         print('<div class="col-xs-12 col-md-2">');
-        print($image->getCaption()."<br />\n");
+        print($image->getCaption()."<br />");
         echo sprintf('
                     <a class="thumbnail" href="getImage.php?id=%s" title="%s" alt="%s">
                         <img src="getImage.php?id=%s" class="img-fluid" />
@@ -165,8 +166,8 @@ border: 1px lightgrey solid;
                 $image->getCaption(),
                 $image->getId()                           
             );
-        print($image->getVotes()." votes\n");
-        print("</div>\n");
+        print($image->getVotes()." votes");
+        print("</div>");
     }
    
 ?>
