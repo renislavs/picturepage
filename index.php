@@ -144,10 +144,11 @@ if (!Authentication::isAuthenticated()) {
        
     } catch(PDOException $e) {
         $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
+        header('Location: ./profilPage.php?'.$e->getMessage());
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     } catch (Exception $e) {
         $_SESSION['error'] = "Could not get image (".$e->getMessage().")";
-      //  header('Location: ./profilPage.php?'.$e->getMessage());
+        header('Location: ./profilPage.php?'.$e->getMessage());
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     }
     
@@ -194,7 +195,7 @@ if (!Authentication::isAuthenticated()) {
         print("</a>\n");
     //    print("<p>".$gb->getVotes()." votes.</p>\n");
         
-    //    if (!in_array($gb->getId(), $a2)) {
+      //  if (!in_array($gb->getId(), $a2)) {
             print("<button type='button'><a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a></button>\n");
     //    }
         print("</div>\n");
