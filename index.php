@@ -61,7 +61,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../../../favicon.ico">
+        <link rel="icon" href="./img/favicon.ico">
         <!-- Bootstrap core CSS -->
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
@@ -195,11 +195,11 @@ if (!Authentication::isAuthenticated()) {
         array_push($a2, $out2['photoid']);
     }
     
-    print("<div class='row'>\n"); 
+    print("<div class='row'>"); 
   
         foreach($images as $image){
             print('<div class="col-xs-12 col-md-2">');
-            print($image->getCaption()." by ".$image->getCredit()."<br />(".$image->getVotes()." votes)\n");
+            print($image->getCaption()." by ".$image->getCredit()."<br />(".$image->getVotes()." votes)");
             echo sprintf('
                         <a class="thumbnail" href="getImage.php?id=%s" title="%s" alt="%s">
                             <img src="getImage.php?id=%s" class="img-fluid" />
@@ -211,20 +211,16 @@ if (!Authentication::isAuthenticated()) {
                     $image->getId()                           
                 );
             if (!in_array($image->getId(), $a2)) {
-                print("<button type='button'><a href='makeVoteDb.php?photoid=".$image->getId()."'>VOTE</a></button>\n");
+                print("<a class='votebutton' href='makeVoteDb.php?photoid=".$image->getId()."'>VOTE</a>");
             }
-            print("</div>\n");
+            print("</div>");
         }
-    print("</div>\n");
+    print("</div>");
 ?>    
     
 <?php
     } // end authenticated - see pics
 ?>    
-    
     </div><!-- /.container -->
-   
-    
-    <!--script src="js/lightbox-plus-jquery.js" type="text/javascript"></script-->    
    
 </html>
