@@ -18,3 +18,12 @@ h4{
 .nomar{
     margin-left: 0px!important;
 }
+
+.votebutton {
+  width: 80px;
+  height: 30px;
+  background-color: #686EAF;
+  padding: 15px;
+  color: white;
+  border-radius: 5px; 
+}
