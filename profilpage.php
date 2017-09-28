@@ -145,17 +145,27 @@ border: 1px lightgrey solid;
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     }
     
-    $a = array();
+    $images = array();
     while ($out = $q->fetch()) {
         $g = new Photo($out['caption'], $out['credit'], $out['id'], $out['imagedata'], $out['mimetype'], $out['story'], $out['tags']);
         $g->setVotes($out['votes']);
-        array_push($a, $g);
+        array_push($images, $g);
     }
 
-    foreach ($a as $gb) {
-        print("<div class='col-sm-3 col-md-3'>\n"); //TODO find class style
-        print($gb);
-        print($gb->getVotes()." votes.");
+    foreach($images as $image){
+        print('<div class="col-xs-12 col-md-2">');
+        print($image->getCaption()."<br />\n");
+        echo sprintf('
+                    <a class="thumbnail" href="getImage.php?id=%s" title="%s" alt="%s">
+                        <img src="getImage.php?id=%s" class="img-fluid" />
+                    </a>
+                ', 
+                $image->getId(),
+                $image->getStory(),
+                $image->getCaption(),
+                $image->getId()                           
+            );
+        print($image->getVotes()." votes\n");
         print("</div>\n");
     }
    
