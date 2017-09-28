@@ -11,7 +11,19 @@
         <title>PicturePage</title>
         <link rel="stylesheet" type="text/css" href="./css/modalStyle.css">
         <script src="./js/modalFunc.js"></script> 
-        <link rel="stylesheet" href="dist/css/lightbox.min.css">
+        <link rel="stylesheet" href="./css/lightbox.min.css">
+        <script src="./js/magnificpopup.min.js"></script>
+         <link href="./css/popupCSS.css" rel="stylesheet">
+        <script>
+         $(document).ready(function() {
+       $('.thumbnail').magnificPopup({
+           type:'image',
+           gallery:{
+             enabled:true
+           }
+       });
+     });
+         </script>
         <script>
             'use strict'; // use correct syntax in js. Helps us find issues in js
             var check = function (e) {
@@ -152,11 +164,11 @@ if (!Authentication::isAuthenticated()) {
         die("Reading failed.<br />".$sql."<br />".$e->getMessage());
     }
     
-    $a = array();
+    $images = array();
     while ($out = $q->fetch()) {
         $g = new Photo($out['caption'], $out['credit'], $out['id'], $out['imagedata'], $out['mimetype'], $out['story'], $out['tags']);
         $g->setVotes($out['votes']);
-        array_push($a, $g);
+        array_push($images, $g);
     }
 
     // Get votes - so that user cannot vote on the same picture twice
@@ -184,27 +196,27 @@ if (!Authentication::isAuthenticated()) {
     }
     
     print("<div class='row'>\n"); 
-        
-    foreach ($a as $gb) {
-        print("<div class='col-sm-3 col-md-3 nomar'>\n"); 
-        
-        print($gb->getCaption()." by ".$gb->getCredit());
-            print("<a href='getImage.php?id=".$gb->getId()."' data-lightbox='example-set'>");
-            print($gb);
-            
-        print("</a>\n");
-    //    print("<p>".$gb->getVotes()." votes.</p>\n");
-        
-      //  if (!in_array($gb->getId(), $a2)) {
-            print("<button type='button'><a href='makeVoteDb.php?photoid=".$gb->getId()."'>VOTE (".$gb->getVotes()." votes)</a></button>\n");
-    //    }
-        print("</div>\n");
-    }
-    
+  
+        foreach($images as $image){
+            print('<div class="col-xs-12 col-md-2">');
+            print($image->getCaption()." by ".$image->getCredit()."<br />(".$image->getVotes()." votes)\n");
+            echo sprintf('
+                        <a class="thumbnail" href="getImage.php?id=%s" title="%s" alt="%s">
+                            <img src="getImage.php?id=%s" class="img-fluid" />
+                        </a>
+                    ', 
+                    $image->getId(),
+                    $image->getStory(),
+                    $image->getCaption(),
+                    $image->getId()                           
+                );
+            if (!in_array($image->getId(), $a2)) {
+                print("<button type='button'><a href='makeVoteDb.php?photoid=".$image->getId()."'>VOTE</a></button>\n");
+            }
+            print("</div>\n");
+        }
     print("</div>\n");
-   
-?>
-    
+?>    
     
 <?php
     } // end authenticated - see pics
@@ -213,5 +225,6 @@ if (!Authentication::isAuthenticated()) {
     </div><!-- /.container -->
    
     
-    <script src="js/lightbox-plus-jquery.js" type="text/javascript"></script>    
+    <!--script src="js/lightbox-plus-jquery.js" type="text/javascript"></script-->    
+   
 </html>
