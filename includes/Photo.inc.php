@@ -27,8 +27,9 @@ class Photo {
     
     public function __toString() {
         $s = '';
-        $s .= sprintf("<img src='getImage.php?id=%s />\n"
-                        , $this->getid());
+        $s .= sprintf("<img src='getImage.php?id=%s' alt='%s' />\n"
+                        , $this->getId()
+                        , $this->getCaption());
         return $s;
     }
  
