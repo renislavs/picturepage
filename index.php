@@ -9,11 +9,28 @@
     <head>
         <meta charset="UTF-8">     
         <title>PicturePage</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Upload and vote on pictures">
+        <meta name="author" content="Group 7">
         <link rel="stylesheet" type="text/css" href="./css/modalStyle.css">
-        <script src="./js/modalFunc.js"></script> 
         <link rel="stylesheet" href="./css/lightbox.min.css">
-        <script src="./js/magnificpopup.min.js"></script>
-         <link href="./css/popupCSS.css" rel="stylesheet">
+        <link href="./css/popupCSS.css" rel="stylesheet">
+        <link rel="icon" href="./img/favicon.ico">
+        <!-- Bootstrap core CSS -->
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="starter-template.css" rel="stylesheet">
+        <link href="./css/mystyle.css" rel="stylesheet">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="./js/modalFunc.js"></script> 
+        <script src="./js/magnificpopup.min.js"></script> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
         <script>
          $(document).ready(function() {
        $('.thumbnail').magnificPopup({
@@ -27,14 +44,7 @@
         <script>
             'use strict'; // use correct syntax in js. Helps us find issues in js
             var check = function (e) {
-                //window.alert("test");
-                if (document.forms.formalia.password.value !== 
-                                   document.forms.formalia.password2.value) {
-                    document.forms.formalia.password.focus();
-                    document.getElementById("err").innerHTML = "Two password entries differ";
-                    e.preventDefault(); 
-                    return false;       
-                } 
+               
                 var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var email = document.forms.formalia.email.value;
                 if (!re.test(email))
@@ -44,6 +54,13 @@
                     e.preventDefault();
                     return false;      
                 }
+                if (document.forms.formalia.password.value !== 
+                                   document.forms.formalia.password2.value) {
+                    document.forms.formalia.password.focus();
+                    document.getElementById("err").innerHTML = "Two password entries differ";
+                    e.preventDefault(); 
+                    return false;       
+                } 
                 return true;
             };
             var init = function () {
@@ -51,23 +68,6 @@
             };
             window.addEventListener('load', init);
         </script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="./img/favicon.ico">
-        <!-- Bootstrap core CSS -->
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="starter-template.css" rel="stylesheet">
-        <link href="./css/mystyle.css" rel="stylesheet">
-
     </head>
     <body>
    
@@ -82,10 +82,10 @@ if (!Authentication::isAuthenticated()) {
 ?>    
     <div class="row">
           <div class="col-sm-6 col-md-6 reg"> 
-                <h4>Log in</h4>
-                <form class="container" action="testLogin.php" method="post">
+                <h4 class="title3">Log in</h4>
+                <form class="container frontinput" action="testLogin.php" method="post">
                     <input type="text" placeholder="Enter email" name="email" required>
-                    <input type="password" placeholder="Enter Password" name="password" required>
+                    <input type="password" placeholder="Enter Password" name="password" required><br />
                     <button>Submit</button>
 <?php
                 if(isset($_SESSION['login_error_msg'])) {
@@ -100,7 +100,7 @@ if (!Authentication::isAuthenticated()) {
                 </form>
               </div>
                <div class="col-sm-6 col-md-6 reg">
-                <h4>Register</h4>
+                   <h4 class="title3">Register</h4><br />
                 <button id="myBtn">Sign me up</button>
               </div>
             </div>
@@ -132,7 +132,7 @@ if (!Authentication::isAuthenticated()) {
     // See all pictures
 ?>
     <form action="index.php" method="post">
-        <input type="checkbox" name="sorted" onChange="this.form.submit()" /> Show me sorted pictures 
+        <input type="checkbox" name="sorted" onChange="this.form.submit()" /> <p style="color: white;">Show me sorted pictures </p>
     </form>
     <br /><br /> 
     <br />
@@ -196,26 +196,24 @@ if (!Authentication::isAuthenticated()) {
     }
     
     print("<div class='row'>"); 
-  
-        foreach($images as $image){
-            print('<div class="col-xs-12 col-md-2">');
-            print($image->getCaption()." by ".$image->getCredit()."<br />(".$image->getVotes()." votes)");
-            echo sprintf('
-                        <a class="thumbnail" href="getImage.php?id=%s" title="%s" alt="%s">
-                            <img src="getImage.php?id=%s" class="img-fluid" />
-                        </a>
-                    ', 
-                    $image->getId(),
-                    $image->getStory(),
-                    $image->getCaption(),
-                    $image->getId()                           
-                );
-            if (!in_array($image->getId(), $a2)) {
-                print("<a class='votebutton' href='makeVoteDb.php?photoid=".$image->getId()."'>VOTE</a>");
-            }
-            print("</div>");
+    foreach($images as $image){
+
+        print("<div class='col-xs-12 col-md-2' style='height:375px; width:200px;'>");
+        print("<p class='captext'>Name: ".$image->getCaption()."</p><p class='captext'>By: ".$image->getCredit()."</p><p class='captext'>Votes: ".$image->getVotes()."</p>");
+        echo sprintf("<a class='thumbnail' href='getImage.php?id=%s' title='%s' alt='%s'>
+                        ".$image."</a>\n", 
+                $image->getId(),
+                $image->getStory(),
+                $image->getCaption(),
+                $image->getId()                           
+            );
+        if (!in_array($image->getId(), $a2)) {
+            print("<a class='votebutton' href='makeVoteDb.php?photoid=".$image->getId()."'>VOTE</a>\n");
         }
-    print("</div>");
+        print("</div>\n");
+        //print("<br />");
+    }
+    print("</div>\n");
 ?>    
     
 <?php
