@@ -7,7 +7,7 @@
         $$key = trim($value);  // vars with names as in form
     }
     
-    //TODO: Serverside alidation of user input:
+    //TODO: Serverside validation of user input:
     // Email correct, firstname only characters, two passwords the same?
     
     $sql = 'insert into voter (firstname, email, password)';
