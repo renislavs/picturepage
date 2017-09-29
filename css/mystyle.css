@@ -1,6 +1,7 @@
 #logo {
   height: 50px;
   margin-top: -15px;
+  margin-left: 60px;
 }
 .reg {
 margin-top: 200px;
@@ -15,10 +16,17 @@ h4{
   font-size: 30px;
 }
 
-.nomar{
-    margin-left: 0px!important;
+.rowleft {
+    margin-left: 50px;
 }
-
+button {
+    width: 150px;
+    height: 50px;
+    color: white;
+    border: none;
+    background-color: grey;
+    font-size: 20px;
+}
 .votebutton {
   width: 80px;
   height: 30px;
@@ -26,4 +34,53 @@ h4{
   padding: 15px;
   color: white;
   border-radius: 5px; 
+}
+
+.nav{
+  float: right;
+  margin-top: -40px
+}
+
+.votebutton {
+  background-color: #00113c!important;
+  
+}
+
+.line{
+  background-color: #00113c!important;
+}
+
+.container-lib{
+    width: 100%!important;
+background-color:#f2f2f2;
+padding: 10px;
+padding-bottom: 50px;
+}
+
+.container-fluid {
+    margin:0px;
+    padding: 0px;
+}
+
+.frontinput > input {
+    margin-bottom: 20px!important;
+}
+.frontinput {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#myBtn {
+background-color: #00113c;}
+
+.title1 {
+    color: white;
+}
+.title3 {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.captext {
+    color: white;
 }
