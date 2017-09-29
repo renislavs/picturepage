@@ -37,7 +37,7 @@ class Authentication extends AuthA {
     }
     
     protected function dbLookUp($email, $pwdtry) {
-        $_SESSION["errmsg"] = "";
+        $_SESSION["error"] = "";
       // Using prepared statements to prevent SQL injection
         $db = DbH::getDbH();
         $sql = "select firstname, password, email 
@@ -53,11 +53,11 @@ class Authentication extends AuthA {
                 $this->firstname = $row['firstname'];
                 $this->email = $email;
             } else {
-                $_SESSION["errmsg"] = "Not authenticated";
+                $_SESSION["error"] = "Not authenticated";
                 throw new Exception("Not authenticated", 42);
             }
         } catch(PDOException $e) {
-            $_SESSION["errmsg"] = $e->getMessage();
+            $_SESSION["error"] = $e->getMessage();
             print($e->getMessage());
             die($e->getMessage()); 
         }
