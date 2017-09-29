@@ -1,22 +1,21 @@
 <?php
     session_start();    
     require_once './includes/Authentication.inc.php';
+    $_SESSION["error"] = "";
     if(!(isset($_FILES['img']))) {
         header("Location: ./profilPage.php");
         
-    } else if ($_FILES['img']['error'] > 0) { // there is a issue with fileupload - find err-code and make good msg to user
+    } else if ($_FILES['img']['error'] > UPLOAD_ERR_OK) { // there is a issue with fileupload - find err-code and make good msg to user
         
         if($_FILES['img']['error'] == UPLOAD_ERR_FORM_SIZE) {
-            $_SESSION["errmsg"] = "The file is too big";
-            
-
+            $_SESSION["error"] = "The file is too big";
         }
         header("Location: ./profilPage.php");
         // and so on... http://php.net/manual/en/features.file-upload.errors.php
     } else {
     
     if ($_FILES['img']['size'] == 0) {
-        $_SESSION["errmsg"] = "No data";
+        $_SESSION["error"] = "No data";
         header("Location: ./profilPage.php");
     }
     
@@ -57,9 +56,11 @@
       $q->bindValue(':tags', $tags);//input
       $q->execute();
     } catch(PDOException $e) {
+        $_SESSION["error"] = $e->getMessage();
       die("Photo posting failed.<br/>".$e->getMessage());
     }
     catch(Exception $e) {
+      $_SESSION["error"] = $e->getMessage();
       die("Photo posting failed.<br/>".$e->getMessage());
     }
     $sql = 'commit;';
